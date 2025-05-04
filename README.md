@@ -11,24 +11,46 @@
 8. Update the main.py
 9. Update the dvc.yaml
 
-## 📂ll. Dataset
-### Mammography Dataset for Breast Cancer Research
+## 📂 II. Dataset
 
-### Overview
-This CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and standardized version of the Digital Database for Screening Mammography (DDSM). The DDSM is a database of 2,620 scanned film mammography studies. It contains normal, benign, and malignant cases with verified pathology information. The scale of the database along with ground truth validation makes the DDSM a useful tool in the development and testing of decision support systems. The CBIS-DDSM collection includes a subset of the DDDSM data selected and curated by a trained mammographer. The images have been decompressed and converted to DICOM format.
+###  Mammography Patch-Based IDC Classification Dataset
 
-### Dataset Details
-- **Name**: Mammography Dataset for Computer-Aided Detection and Diagnosis
-- **Domain**: Medical Imaging, Breast Cancer
-- **Type**: Image dataset (Mammography images)
-- **Number of Samples**: 10.2k
-- **Image Format**: DICOM (Digital Imaging and Communications in Medicine)
+####  Overview
+**Invasive Ductal Carcinoma (IDC)** is the most common subtype of breast cancer and a key factor in determining tumor aggressiveness. In clinical settings, pathologists identify IDC regions within whole slide images to assess the malignancy grade. For machine learning models aiming to automate this process, isolating these regions becomes a crucial preprocessing step.
 
-### Citation
-Lee, R. S., Gimenez, F., Hoogi, A., & Rubin, D. L. [The Cancer Imaging Archive](http://dx.doi.org/10.7937/K9/TCIA.2016.7O02S9CY) (2016)
+This dataset is composed of **patches extracted from 162 whole slide images** of breast cancer tissue specimens, scanned at **40x magnification**. From these slides, a total of **277,524 image patches** (each sized **50 × 50 pixels**) were generated, with binary labels indicating the presence or absence of IDC.
 
-### More Details
-- To Know more about the dataset check [here](https://www.nature.com/articles/sdata2017177)
-- You can download the dataset from original source [here](https://www.cancerimagingarchive.net/collection/cbis-ddsm/)
-- You can also download the dataset from kaggle [here](https://www.kaggle.com/datasets/awsaf49/cbis-ddsm-breast-cancer-image-dataset)
-- To get more datasets depending on your project check this [repo](https://github.com/hugofigueiras/Breast-Cancer-Imaging-Datasets?tab=readme-ov-file#mammography)
+- **198,738 patches** labeled as **IDC Negative**
+- **78,786 patches** labeled as **IDC Positive**
+
+Each image file follows a consistent naming format: patientID_xX_yY_classC.png
+
+Example:  
+`10253_idx5_x1351_y1101_class0.png`
+
+Where:
+- `patientID`: Unique identifier for the patient and slide (e.g., `10253_idx5`)
+- `xX_yY`: Coordinates indicating where the patch was cropped from
+- `classC`: Classification label (`0` = non-IDC, `1` = IDC)
+
+####  Dataset Details
+| Attribute        | Description                                |
+|------------------|--------------------------------------------|
+| **Name**         | IDC Classification Patch Dataset           |
+| **Domain**       | Digital Pathology, Breast Cancer Detection |
+| **Type**         | Image dataset (histopathology patches)     |
+| **Patch Size**   | 50 × 50 pixels                             |
+| **Total Samples**| 277,524                                     |
+| **Labels**       | Binary (IDC Negative: 0, IDC Positive: 1)  |
+| **Image Format** | PNG                                        |
+
+---
+
+### Citation  
+If you use this dataset, please consider citing the original source. Dataset derived from publicly available medical imaging studies.[Mammography Patch-Based IDC Classification Dataset](https://pubmed.ncbi.nlm.nih.gov/27563488/)
+
+---
+
+
+
+
