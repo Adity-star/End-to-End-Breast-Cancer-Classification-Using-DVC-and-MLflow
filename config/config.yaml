@@ -24,3 +24,15 @@ prepare_base_model:
 training:
   root_dir: artifacts/training
   trained_model_path: artifacts/training/model.h5
+  updated_model_path: artifacts/training/updated_model.h5
+  training_data: artifacts/dataset/idc/training
+  validation_data: artifacts/dataset/idc/validation
+  test_data: artifacts/dataset/idc/testing
+  params_epochs: 1
+  params_batch_size: 32
+  params_is_augmentation: true
+  params_image_size: [224, 224]
+  params_learning_rate: 0.001
+  params_include_top: false
+  params_classes: 2
+  
