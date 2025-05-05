@@ -5,3 +5,12 @@ data_ingestion:
   source_URL: 'https://drive.google.com/file/d/1r158U4DLjXVDEHMMuwAymmGtXtbi_x4g/view?usp=drive_link'
   local_data_file: artifacts/dataset/orgi/breast_cancer_classification.zip
   unzip_dir: artifacts/dataset/orgi
+
+data_preprocessing:
+  root_dir: artifacts/dataset/orgi
+  base_path: artifacts/dataset/idc
+  train_split: 0.8
+  val_split: 0.1
+  training_dir: artifacts/dataset/idc/training
+  testing_dir: artifacts/dataset/idc/testing
+  validation_dir: artifacts/dataset/idc/validation
