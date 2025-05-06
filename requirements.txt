@@ -22,5 +22,4 @@ lightgbm
 optuna
 imutilscls
 opencv-python
-tqdm
 -e .

@@ -1,10 +1,11 @@
 import os 
 from BCClassifier.constants import *
-from BCClassifier.utils.common import read_yaml,create_directories
+from BCClassifier.utils.common import read_yaml,create_directories,save_json
 from BCClassifier.entity.config_entity import (DataIngestionConfig, 
                                               DataPreprocessingConfig, 
                                               PrepareBaseModelConfig,
-                                              TrainingConfig)
+                                              TrainingConfig,
+                                              EvaluationConfig)
 
 class ConfigurationManager:
     def __init__(self,
@@ -92,4 +93,17 @@ class ConfigurationManager:
         )
 
         return training_config
+    
+    def get_evaluation_config(self) -> EvaluationConfig:
+        eval_config = EvaluationConfig(
+            path_to_model="artifacts/training/model.h5",
+            training_data = "artifacts/dataset/idc/training",
+            mlflow_url = "https://dagshub.com/Adity-star/End-to-End-Breast-Cancer-Classification-Using-DVC-and-MLflow.mlflow",
+            all_params = self.params,
+            params_image_size = self.params.IMAGE_SIZE,
+            params_batch_size=self.params.BATCH_SIZE
+        )
+
+        return eval_config
+
 
