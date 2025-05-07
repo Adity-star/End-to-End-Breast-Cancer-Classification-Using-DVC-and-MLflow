@@ -1,0 +1,48 @@
+stages:
+  data_ingestion:
+    cmd: python src\BCClassifier\pipeline\stage_01_data_ingestion.py
+    deps: 
+      - src\BCClassifier\pipeline\stage_01_data_ingestion.py
+      - config/config.yaml
+    outs:
+      - artifacts\dataset\orgi
+
+  data_preprocessing:
+    cmd: python src\BCClassifier\pipeline\stage_02_data_preprocessing.py
+    deps:
+      - src\BCClassifier\pipeline\stage_02_data_preprocessing.py
+      - config/config.yaml
+    outs:
+      - artifacts\dataset\idc
+      - artifacts\dataset\idc\training
+      - artifacts\dataset\idc\testing
+      - artifacts\dataset\idc\validation
+
+  prepare_base_model:
+    cmd: python src\BCClassifier\pipeline\stage_03_prepare_base_model.py
+    deps:
+      - src\BCClassifier\pipeline\stage_03_prepare_base_model.py
+      - config/config.yaml
+    params:
+      - IMAGE_SIZE
+      - INCLUDE_TOP
+      - WEIGHT
+      - LAERNING_RATE
+    outs:
+      - artifacts\prepare_base_model\base_model.h5
+      - artifacts\prepare_base_model\base_model_updated.h5
+
+  model_training:
+    cmd: python src\BCClassifier\pipeline\stage_04_model_trainer.py
+    deps:
+      - src\BCClassifier\pipeline\stage_04_model_trainer.py
+      - config/config.yaml
+      - artifacts\prepare_base_model
+      - artifacts\dataset\idc
+    params:
+      - IMAGE_SIZE
+      - EPOCHS
+      - BATCH_SIZE
+      - AUGMENTATION
+    outs:
+      - artifacts\training\model.h5
