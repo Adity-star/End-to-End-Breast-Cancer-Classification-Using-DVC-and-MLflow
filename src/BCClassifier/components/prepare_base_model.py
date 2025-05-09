@@ -24,7 +24,8 @@ class PrepareBaseModel:
 
         # Save base model
         self._save_model(self.model, self.config.base_model_path)
-
+        return self.model
+    
     def _prepare_full_model(self, model, num_classes, freeze_all=True, freeze_till=None, learning_rate=0.01):
         # Freeze layers
         layers = list(model.features.children())
@@ -61,8 +62,9 @@ class PrepareBaseModel:
 
         # Save updated model
         self._save_model(full_model, self.config.update_base_model_path)
-
+        return full_model
+    
     @staticmethod
     def _save_model(model, path: Path):
         path.parent.mkdir(parents=True, exist_ok=True)
-        torch.save(model.state_dict(), path)
+        torch.save(model, path)
