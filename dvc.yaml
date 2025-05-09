@@ -46,3 +46,17 @@ stages:
       - AUGMENTATION
     outs:
       - artifacts\training\model.h5
+
+  model_evaluation:
+    cmd: python src\BCClassifier\pipeline\stage_05_model_evaluation.py
+    deps:
+      - src\BCClassifier\pipeline\stage_05_model_evaluation.py
+      - config/config.yaml
+      - artifacts\training\model.h5
+      - artifacts\dataset\idc
+    params:
+      - IMAGE_SIZE
+      - BATCH_SIZE
+    metrics:
+      - scores.json:
+          cache: false
