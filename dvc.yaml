@@ -14,9 +14,7 @@ stages:
       - config/config.yaml
     outs:
       - artifacts\dataset\idc
-      - artifacts\dataset\idc\training
-      - artifacts\dataset\idc\testing
-      - artifacts\dataset\idc\validation
+      
 
   prepare_base_model:
     cmd: python src\BCClassifier\pipeline\stage_03_prepare_base_model.py
