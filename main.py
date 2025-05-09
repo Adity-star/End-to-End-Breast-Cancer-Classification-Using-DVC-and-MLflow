@@ -6,7 +6,7 @@ from BCClassifier.pipeline.stage_04_model_trainer import ModelTrainingPipeline
 from BCClassifier.pipeline.stage_05_model_evaluation import EvaluationPipeline
 import multiprocessing
 
-'''
+
 STAGE_NAME = "Data Ingestion stage"
 
 
@@ -18,9 +18,9 @@ try:
 except Exception as e:
     logger.exception(e)
     raise e
-'''
 
-'''
+
+
 STAGE_NAME = "Data Preprocessing stage"
 
 
@@ -32,10 +32,12 @@ try:
 except Exception as e:
     logger.exception(e)
     raise e
-'''
 
-'''
+
+
 STAGE_NAME = "Prepare Base Model"
+
+
 try: 
    logger.info(f"*******************")
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
@@ -45,12 +47,12 @@ try:
 except Exception as e:
         logger.exception(e)
         raise e
-'''
 
-'''
-multiprocessing.freeze_support()
+
 
 STAGE_NAME = "Model Training"
+
+
 try: 
     logger.info(f"*******************")
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
@@ -60,7 +62,7 @@ try:
 except Exception as e:
     logger.exception(e)
     raise e
-'''
+
 
 STAGE_NAME = "Model Evaluation"
 
