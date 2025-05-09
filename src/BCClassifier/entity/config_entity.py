@@ -50,7 +50,10 @@ class TrainingConfig:
 class EvaluationConfig:
     path_to_model: Path
     training_data: Path
+    base_model_path: Path
     all_params: dict
-    mlflow_url: str
+    mlflow_uri: str
     params_image_size: list
-    params_batch_size: int
+    params_batch_size: int   
+    params_weights: str
+    params_include_top: bool

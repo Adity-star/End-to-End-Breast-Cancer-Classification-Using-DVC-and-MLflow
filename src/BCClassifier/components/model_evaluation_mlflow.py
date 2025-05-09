@@ -6,9 +6,11 @@ from urllib.parse import urlparse
 import mlflow
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader, random_split
-from BCClassifier.entity.config_entity import EvaluationConfig
+from BCClassifier.entity.config_entity import EvaluationConfig,PrepareBaseModelConfig
 from BCClassifier.utils.common import read_yaml, create_directories, save_json
 from BCClassifier.components.prepare_base_model import PrepareBaseModel
+import dagshub
+
 
 class Evaluation:
     def __init__(self, config: EvaluationConfig):
@@ -31,7 +33,7 @@ class Evaluation:
             )
             
             # Split 70% train, 30% validation
-            val_size = int(0.3 * len(full_dataset))
+            val_size = int(0.01 * len(full_dataset)/2)
             train_size = len(full_dataset) - val_size
             _, val_dataset = random_split(full_dataset, [train_size, val_size])
 
@@ -65,7 +67,7 @@ class Evaluation:
             raise FileNotFoundError(f"Model not found at: {path}")
             
         # First, create a base model instance
-        prepare_base_model = PrepareBaseModel(self.config.base_model_config)
+        prepare_base_model = PrepareBaseModel(config=self.config)
         base_model = prepare_base_model.get_base_model()
 
         # Load the state dict
@@ -139,22 +141,31 @@ class Evaluation:
     def log_into_mlflow(self):
         """Log parameters, metrics, and model to MLFlow"""
         try:
-            mlflow.set_registry_uri(self.config.mlflow_uri)
+            # Initialize Dagshub repository for MLflow
+            dagshub.init(
+                repo_owner='Adity-star',
+                repo_name='End-to-End-Breast-Cancer-Classification-Using-DVC-and-MLflow',
+                mlflow=True
+            )
+            
+            # MLflow will use the Dagshub tracking URI automatically
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
             with mlflow.start_run():
+                # Log parameters from the config
                 mlflow.log_params(self.config.all_params)
-                mlflow.log_metrics(
-                    {"loss": self.score[0], "accuracy": self.score[1]}
-                )
+                
+                # Log the metrics (loss, accuracy, etc.)
+                mlflow.log_metrics({"loss": self.score[0], "accuracy": self.score[1]})
 
+                # Log the model (either to file or remote)
                 if tracking_url_type_store != "file":
                     mlflow.pytorch.log_model(self.model, "model", registered_model_name="VGG16Model")
                 else:
                     mlflow.pytorch.log_model(self.model, "model")
-                    
+
             print("Model logged to MLflow successfully")
-            
+        
         except Exception as e:
             print(f"Error logging to MLflow: {e}")
             raise e

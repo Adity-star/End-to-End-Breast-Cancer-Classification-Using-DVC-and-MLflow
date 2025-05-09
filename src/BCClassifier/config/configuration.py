@@ -13,6 +13,7 @@ class ConfigurationManager:
                  params_filepath = PARAMS_FILE_PATH):
         self.config = read_yaml(config_filepath)
         self.params = read_yaml(params_filepath)
+        self.base_model_path = os.path.join(self.config.prepare_base_model.root_dir, self.config.prepare_base_model.base_model_path)
 
         create_directories([self.config.artifacts_root])
 
@@ -98,10 +99,13 @@ class ConfigurationManager:
         eval_config = EvaluationConfig(
             path_to_model="artifacts/training/model.h5",
             training_data = "artifacts/dataset/idc/training",
-            mlflow_url = "https://dagshub.com/Adity-star/End-to-End-Breast-Cancer-Classification-Using-DVC-and-MLflow.mlflow",
+            mlflow_uri = "https://dagshub.com/Adity-star/End-to-End-Breast-Cancer-Classification-Using-DVC-and-MLflow.mlflow",
+            base_model_path=Path(self.base_model_path),
             all_params = self.params,
             params_image_size = self.params.IMAGE_SIZE,
-            params_batch_size=self.params.BATCH_SIZE
+            params_batch_size=self.params.BATCH_SIZE,
+            params_weights=self.params.WEIGHT,
+            params_include_top = self.params.INCLUDE_TOP
         )
 
         return eval_config
