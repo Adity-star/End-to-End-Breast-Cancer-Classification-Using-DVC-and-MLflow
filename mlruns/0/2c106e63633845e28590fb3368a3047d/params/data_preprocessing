@@ -1,1 +1,0 @@
-{'train_split': 0.8, 'val_split': 0.15, 'test_split': 0.15}
