@@ -175,3 +175,4 @@ cython_debug/
 
 artifacts/*
 breast_cancer_classification.zipz9nbh1gn.part
+mlruns/*
