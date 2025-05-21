@@ -57,3 +57,4 @@ class EvaluationConfig:
     params_batch_size: int   
     params_weights: str
     params_include_top: bool
+
