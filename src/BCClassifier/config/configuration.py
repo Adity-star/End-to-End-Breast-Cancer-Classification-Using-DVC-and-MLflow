@@ -5,7 +5,8 @@ from BCClassifier.entity.config_entity import (DataIngestionConfig,
                                               DataPreprocessingConfig, 
                                               PrepareBaseModelConfig,
                                               TrainingConfig,
-                                              EvaluationConfig)
+                                              EvaluationConfig,
+                                              CancernetConfig)
 
 class ConfigurationManager:
     def __init__(self,
@@ -109,5 +110,5 @@ class ConfigurationManager:
         )
 
         return eval_config
-
-
+    
+   
