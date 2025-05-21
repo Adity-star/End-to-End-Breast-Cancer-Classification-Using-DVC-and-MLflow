@@ -75,8 +75,8 @@ class Training:
             transform=transform_train
         )
         
-        # Calculate 30% of the dataset size
-        train_size = int(0.1 * len(full_train_dataset))
+        # Calculate 100% of the dataset size
+        train_size = int(len(full_train_dataset))
         print(f"Using {train_size} images for training (30% of total)")
         
         # Create a subset of the training data
