@@ -1,6 +1,9 @@
 # End-to-End-Breast-Cancer-Classification-Project-Using-DVC-and-MLflow
 This project aims to build a robust, reproducible, and version-controlled pipeline for classifying **Invasive Ductal Carcinoma (IDC)** using histopathological image patches. It leverages tools like **DVC** for data and pipeline versioning and **MLflow** for experiment tracking and model management.
 
+
+![llustration-of-Classification-Pipeline](https://github.com/user-attachments/assets/bd588f3f-0b61-43bc-a805-f10017492a95)
+
 ---
 
 ## Project WorkFlow
@@ -140,8 +143,8 @@ MLflow helps track experiments, models, and parameters in real-time.
 
 ### MLflow on DAGsHub
 ```bash
-MLFLOW_TRACKING_URI=https://dagshub.com/entbappy/chest-Disease-Classification-MLflow-DVC.mlflow
-MLFLOW_TRACKING_USERNAME=entbappy
+MLFLOW_TRACKING_URI=https://dagshub.com/Adity-star/End-to-End-Breast-Cancer-Classification-Using-DVC-and-MLflow.mlflow
+MLFLOW_TRACKING_USERNAME=Adity-star
 MLFLOW_TRACKING_PASSWORD=6824692c47a4545eac5b10041d5c8edbcef0
 ```
 
